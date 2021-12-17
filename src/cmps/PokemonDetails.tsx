@@ -8,7 +8,8 @@ import { Pokemon, PokemonData } from '../types/interfaces'
 
 
 const Container = styled.section`
-    width: 500px;
+    width: 80%;
+    max-width: 500px;
     text-align: center;
     background-color: red;
     border: 1px solid white;
@@ -83,19 +84,15 @@ const ButtonContainer = styled.article`
     margin: 25px 0;
     display: flex;
     justify-content: space-around;
-    button{
-        all: unset;
+    pre{
         border: 2px solid black;
-        cursor: pointer;
-        padding: 15px 35px;
+        padding: 15px 14px;
         border-radius: 15px;
         background-color: white;
         color: black;
-
-        transition: 0.3s;
-        &:hover{
-            transition: 0.3s;
-            color: red;
+    span{
+        background-color: unset;
+        color: gray;
         }
     }
 `
@@ -115,7 +112,7 @@ export const PokemonDetails: React.FC = () => {
     const history = useHistory<unknown>()
     const [isUserMsg, setisUserMsg] = useState(false)
     const [details, setDetails] = useState<null | PokemonData>(null)
-
+console.log(`details`, details)
     const currPokemon: Pokemon | null = useSelector((state: RootState) => state.pokemon.currPokemon)
 
     useEffect((): void => {
@@ -141,7 +138,7 @@ export const PokemonDetails: React.FC = () => {
         <>
             <Container>
                 <aside>
-                    <button onClick={() => history.push('/')}>Go back</button>
+                    <button onClick={() => history.push('/')}>&laquo; Go back</button>
                     <span>{details.name}</span>
                 </aside>
                 <ImgContainet>
@@ -150,8 +147,8 @@ export const PokemonDetails: React.FC = () => {
 
 
                 <ButtonContainer>
-                    <button onClick={() => moveTo('prev')}>Prev</button>
-                    <button onClick={() => moveTo('next')}>Next</button>
+                    <pre> <span>Height:</span> {details.height}</pre>
+                    <pre> <span>Weight:</span> {details.weight}</pre>
                 </ButtonContainer>
                 <h1>Pokedex</h1>
             </Container>
